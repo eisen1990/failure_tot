@@ -30,7 +30,7 @@ public class DeviceController {
 	@RequestMapping
 	public ModelAndView viewDeviceList() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("customer/view");
+		mav.setViewName("device/view");
 		
 		return mav;
 	}

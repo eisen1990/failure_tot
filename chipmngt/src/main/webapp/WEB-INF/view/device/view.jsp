@@ -5,7 +5,8 @@
 
 <%@include file = "../nav.jsp" %>
 
-<%@include file = "putExcel.js" %>
+<%@include file = "putDevice.js" %>
+<%@include file = "getDevices.js" %>
 
 <div class="container-fluid col-sm-9 col-md-10">
 
@@ -14,10 +15,10 @@
 	</div>
 
 
-	<form method="post" id="insert_customer_form" name="insert_customer_form">
-		<input type="text" id="tc_customer" name="tc_customer"> 
-		<input type="text" id="end_customer" name="end_customer">
-		<button type="button" id="submit_customer">등록</button>
+	<form method="post" id="insert_device_form" name="insert_device_form">
+		<input type="text" id="device" name="device"> 
+		<input type="text" id="family" name="family">
+		<button type="button" id="submit_device">등록</button>
 	</form>
 </div>
 

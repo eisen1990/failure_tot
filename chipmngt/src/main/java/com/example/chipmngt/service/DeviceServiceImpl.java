@@ -3,10 +3,12 @@ package com.example.chipmngt.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.chipmngt.dao.DeviceDAO;
 import com.example.chipmngt.dto.DeviceDTO;
 
+@Service
 public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired

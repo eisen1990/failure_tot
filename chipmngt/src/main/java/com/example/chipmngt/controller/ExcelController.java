@@ -3,6 +3,7 @@ package com.example.chipmngt.controller;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.CellType;
@@ -13,10 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -35,17 +38,40 @@ public class ExcelController {
 		return mav;
 	}
 	
-	@PostMapping(value = "")
+	@PostMapping(value = "/upload")
 	@ResponseBody
-	public JSONObject uploadExcel() {
-		return new JSONObject();
+	public JSONObject uploadExcel(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = null;
+		JSONObject result = new JSONObject();
+		JSONArray jArray = null;
+		
+		Iterator<String> itr = req.getFileNames();
+		if (itr.hasNext()) {
+			file = req.getFile(itr.next());
+
+			if (file != null) {
+				System.out.println("file name : " + file.getName());
+				jArray = uploadExcel(file);
+				result.put("result", "pass");
+				result.put("list", jArray);
+			} else {
+				result.put("result", "File Error");
+				result.put("msg", "Fail to File transfer");
+			}
+			
+		} else {
+			// upload된 file이 없을 경우
+			result.put("result", "File Error");
+		}
+		
+		return result;
 	}
 	
 	/*
 	 * Excel upload routine
 	 */
-	public JSONObject uploadExcel(MultipartFile file) {
-		JSONObject result = new JSONObject();
+	public JSONArray uploadExcel(MultipartFile file) {
+		JSONArray jArray = new JSONArray();
 		try {
 			OPCPackage opcPackage = OPCPackage.open(file.getInputStream());
 			XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
@@ -106,7 +132,7 @@ public class ExcelController {
 				}
 
 			}
-			JSONArray jArray = new JSONArray();
+			
 			for (String key : hm.keySet()) {
 				Integer val = hm.get(key);
 				JSONObject jElement = new JSONObject();
@@ -114,14 +140,13 @@ public class ExcelController {
 				jElement.put("count", val);
 				jArray.add(jElement);
 			}
-			result.put("result", jArray);
-			System.out.println(result.toString());
+			System.out.println(jArray.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 
 		}
-		return result;
+		return jArray;
 	}
 	
 }
