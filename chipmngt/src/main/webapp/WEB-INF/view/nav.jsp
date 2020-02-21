@@ -5,7 +5,7 @@
 	<ul class="nav nav-sidebar">
 		<li class="active"><a href="/">Failure Summary</a></li>
 		<li class="active"><a href="/shipment">Shipment Info</a></li>
-		<li class="active"><a href="/device">Excel Upload</a></li>
+		<li class="active"><a href="/excel">Excel Upload</a></li>
 		<li class="active"><a href="/customer">Customer MNGT</a></li>
 		<li class="active"><a href="/device">Device MNGT</a></li>
 

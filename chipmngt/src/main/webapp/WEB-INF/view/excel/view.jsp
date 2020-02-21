@@ -14,10 +14,9 @@
 	</div>
 
 
-	<form method="post" id="insert_customer_form" name="insert_customer_form">
-		<input type="text" id="tc_customer" name="tc_customer"> 
-		<input type="text" id="end_customer" name="end_customer">
-		<button type="button" id="submit_customer">등록</button>
+<form method="post" enctype="multipart/form-data" id="excel_upload_form" name="excel_upload_form">
+	<input type="file" name="excelFile" />
+	<button type="button" onclick="doExcelUploadProcess()">upload</button>
 	</form>
 </div>
 

@@ -51,17 +51,26 @@ public class ExcelController {
 
 			if (file != null) {
 				System.out.println("file name : " + file.getName());
-				jArray = uploadExcel(file);
-				result.put("result", "pass");
-				result.put("list", jArray);
+				try {
+					jArray = uploadExcel(file);
+					result.put("result", "pass");
+					result.put("list", jArray);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					result.put("result", "error");
+					result.put("msg", "File Error");
+				}
+				
 			} else {
-				result.put("result", "File Error");
+				result.put("result", "error");
 				result.put("msg", "Fail to File transfer");
 			}
 			
 		} else {
 			// upload된 file이 없을 경우
-			result.put("result", "File Error");
+			result.put("result", "error");
+			result.put("msg", "Fail to File transfer");
 		}
 		
 		return result;
@@ -70,7 +79,7 @@ public class ExcelController {
 	/*
 	 * Excel upload routine
 	 */
-	public JSONArray uploadExcel(MultipartFile file) {
+	public JSONArray uploadExcel(MultipartFile file) throws Exception {
 		JSONArray jArray = new JSONArray();
 		try {
 			OPCPackage opcPackage = OPCPackage.open(file.getInputStream());
