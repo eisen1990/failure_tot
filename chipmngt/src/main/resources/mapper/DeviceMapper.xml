@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chipmngt.dao.DeviceDAO">
+	<insert id="insertDevice" parameterType="com.example.chipmngt.dto.DeviceDTO">
+		INSERT INTO device_list VALUES (NULL, #{device}, #{family});
+	</insert>
+	
+	<select id="selectDevices" resultType="com.example.chipmngt.dto.DeviceDTO">
+		SELECT 
+		 id as id,
+		 device as device,
+		 family as family
+		FROM device_list;
+	</select>
+</mapper>

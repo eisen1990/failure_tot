@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chipmngt.dao.CustomerDAO">
+	<insert id="insertCustomer" parameterType="com.example.chipmngt.dto.CustomerDTO">
+		INSERT INTO customer_list VALUES (NULL, #{tcCustomer}, #{endCustomer});
+	</insert>
+	
+	<select id="selectCustomers" resultType="com.example.chipmngt.dto.CustomerDTO">
+		SELECT 
+		 id as id,
+		 tc_customer as tcCustomer,
+		 end_customer as endCustomer
+		FROM customer_list;
+	</select>
+</mapper>
