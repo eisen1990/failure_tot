@@ -5,6 +5,16 @@ public class DeviceDTO {
 	private String device;
 	private String family;
 
+	public DeviceDTO() {
+		
+	}
+	
+	public DeviceDTO(String device, String family) {
+		this.id = null;
+		this.device = device;
+		this.family = family;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

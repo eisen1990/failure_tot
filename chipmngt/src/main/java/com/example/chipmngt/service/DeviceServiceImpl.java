@@ -13,10 +13,10 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired
 	private DeviceDAO deviceDAO;
-	
+
 	@Override
 	public List<DeviceDTO> getDevices() throws Exception {
-		List<DeviceDTO> result = deviceDAO.selectDevices(); 
+		List<DeviceDTO> result = deviceDAO.selectDevices();
 		return result;
 	}
 
@@ -25,4 +25,13 @@ public class DeviceServiceImpl implements DeviceService {
 		deviceDAO.insertDevice(dDTO);
 	}
 
+	@Override
+	public void modifyDevice(DeviceDTO dDTO) throws Exception {
+		deviceDAO.updateDevice(dDTO);
+	}
+
+	@Override
+	public void removeDevice(Integer id) throws Exception {
+		deviceDAO.deleteDevice(id);
+	}
 }

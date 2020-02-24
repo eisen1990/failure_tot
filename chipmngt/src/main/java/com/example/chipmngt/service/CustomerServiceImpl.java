@@ -24,4 +24,14 @@ public class CustomerServiceImpl implements CustomerService {
 	public void putCustomer(CustomerDTO cDTO) {
 		customerDAO.insertCustomer(cDTO);
 	}
+	
+	@Override
+	public void modifyCustomer(CustomerDTO cDTO) throws Exception {
+		customerDAO.updateCustomer(cDTO);	
+	}
+	
+	@Override
+	public void removeCustomer(Integer id) throws Exception {
+		customerDAO.deleteCustomer(id);
+	}
 }

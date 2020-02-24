@@ -9,9 +9,22 @@
 	
 	<select id="selectCustomers" resultType="com.example.chipmngt.dto.CustomerDTO">
 		SELECT 
-		 id as id,
-		 tc_customer as tcCustomer,
-		 end_customer as endCustomer
+		 id as id, 
+		 tc_customer as tcCustomer, 
+		 end_customer as endCustomer 
 		FROM customer_list;
 	</select>
+	
+	<update id="updateCustomer" parameterType="com.example.chipmngt.dto.CustomerDTO">
+		UPDATE customer_list 
+		SET 
+		 tc_customer = #{tcCustomer},
+		 end_customer = #{endCustomer}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteCustomer" parameterType="Integer">
+		DELETE FROM customer_list 
+		WHERE id=#{id}
+	</delete>
 </mapper>

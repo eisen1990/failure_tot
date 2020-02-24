@@ -1,4 +1,4 @@
-package com.example.chipmngt.ConfigService;
+package com.example.chipmngt.configservice;
 
 import java.util.Map;
 import java.util.Map.Entry;

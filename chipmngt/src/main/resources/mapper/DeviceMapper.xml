@@ -8,10 +8,23 @@
 	</insert>
 	
 	<select id="selectDevices" resultType="com.example.chipmngt.dto.DeviceDTO">
-		SELECT 
-		 id as id,
-		 device as device,
-		 family as family
-		FROM device_list;
+		SELECT  
+		 id as id, 
+		 device as device, 
+		 family as family 
+		FROM device_list; 
 	</select>
+	
+	<update id="updateDevice" parameterType="com.example.chipmngt.dto.DeviceDTO">
+		UPDATE device_list 
+		SET 
+		 device = #{device}, 
+		 family = #{family} 
+		WHERE id = #{id} 
+	</update>
+	
+	<delete id="deleteDevice" parameterType="Integer">
+		DELETE FROM device_list 
+		WHERE id=#{id}
+	</delete>
 </mapper>

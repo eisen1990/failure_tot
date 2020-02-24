@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.chipmngt.dto.DeviceDTO;
 import com.example.chipmngt.service.DeviceService;
-import com.example.chipmngt.utils.CJSON;
 
 @Controller
 @RequestMapping(value = "/shipment")
@@ -24,8 +23,6 @@ public class ShipmentController {
 		
 	@Autowired
 	private DeviceService DeviceService;
-	
-	private CJSON cJSON = new CJSON();
 	
 	@RequestMapping
 	public ModelAndView viewCustomerList() {
@@ -43,9 +40,9 @@ public class ShipmentController {
 		
 		try {
 			list = DeviceService.getDevices();
-			JSONArray jsonList = cJSON.DeviceToJSON(list);
+//			JSONArray jsonList = cJSON.DeviceToJSON(list);
 			result.put("result", "pass");
-			result.put("list", jsonList);
+//			result.put("list", jsonList);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

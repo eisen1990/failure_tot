@@ -1,8 +1,8 @@
-<script>
+<script type="text/javascript">
 $(function() {
 	$.ajax({
 		url : "/device/list",
-		type : "post",
+		type : "get",
 		dataType : "json",
 		success : function(data) {
 			console.log(data);
