@@ -38,7 +38,13 @@ public class ExcelController {
 		return mav;
 	}
 	
-	@PostMapping(value = "/upload")
+	@PostMapping(value = "/upload/customer")
+	@ResponseBody
+	public JSONObject uploadCustomer() {
+		return new JSONObject();
+	}
+	
+	@PostMapping(value = "/upload/shipment")
 	@ResponseBody
 	public JSONObject uploadExcel(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = null;
@@ -53,17 +59,17 @@ public class ExcelController {
 				System.out.println("file name : " + file.getName());
 				try {
 					jArray = uploadExcel(file);
-					result.put("result", "pass");
+					result.put("result", true);
 					result.put("list", jArray);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					result.put("result", "error");
+					result.put("result", false);
 					result.put("msg", "File Error");
 				}
 				
 			} else {
-				result.put("result", "error");
+				result.put("result", false);
 				result.put("msg", "Fail to File transfer");
 			}
 			

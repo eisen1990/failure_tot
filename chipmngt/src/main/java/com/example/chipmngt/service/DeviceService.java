@@ -5,8 +5,8 @@ import java.util.List;
 import com.example.chipmngt.dto.DeviceDTO;
 
 public interface DeviceService {
-	public List<DeviceDTO> getDevices() throws Exception;
-	public void putDevice(DeviceDTO dDTO) throws Exception;
-	public void modifyDevice(DeviceDTO dDTO) throws Exception;
-	public void removeDevice(Integer id) throws Exception;
+	public List<DeviceDTO> getDevices();
+	public boolean putDevice(DeviceDTO dDTO);
+	public boolean modifyDevice(DeviceDTO dDTO);
+	public boolean removeDevice(Integer id);
 }

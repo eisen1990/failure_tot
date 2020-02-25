@@ -12,7 +12,8 @@
 		 id as id, 
 		 device as device, 
 		 family as family 
-		FROM device_list; 
+		FROM device_list
+		;
 	</select>
 	
 	<update id="updateDevice" parameterType="com.example.chipmngt.dto.DeviceDTO">
@@ -20,11 +21,13 @@
 		SET 
 		 device = #{device}, 
 		 family = #{family} 
-		WHERE id = #{id} 
+		WHERE id = #{id}
+		; 
 	</update>
 	
 	<delete id="deleteDevice" parameterType="Integer">
 		DELETE FROM device_list 
 		WHERE id=#{id}
+		;
 	</delete>
 </mapper>

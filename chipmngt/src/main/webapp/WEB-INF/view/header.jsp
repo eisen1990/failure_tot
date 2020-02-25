@@ -21,5 +21,15 @@
 <![endif]-->
 
 <script type="text/javascript" src="/resources/js/jquery-3.4.1.min.js"></script>
+<script>
+	function check_param(val) {
+		var substr = "/";
+		if (val.indexOf(substr) !== -1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body>

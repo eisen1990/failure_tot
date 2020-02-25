@@ -16,22 +16,48 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<CustomerDTO> getCustomers() {
-		List<CustomerDTO> result = customerDAO.selectCustomers(); 
+		List<CustomerDTO> result = null;
+		try {
+			result = customerDAO.selectCustomers();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
 		return result;
 	}
 	
 	@Override
-	public void putCustomer(CustomerDTO cDTO) {
-		customerDAO.insertCustomer(cDTO);
+	public boolean putCustomer(CustomerDTO cDTO) {
+		boolean flag = false;
+		try {
+			customerDAO.insertCustomer(cDTO);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 	
 	@Override
-	public void modifyCustomer(CustomerDTO cDTO) throws Exception {
-		customerDAO.updateCustomer(cDTO);	
+	public boolean modifyCustomer(CustomerDTO cDTO) {
+		boolean flag = false;
+		try {
+			customerDAO.updateCustomer(cDTO);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 	
 	@Override
-	public void removeCustomer(Integer id) throws Exception {
-		customerDAO.deleteCustomer(id);
+	public boolean removeCustomer(Integer id) {
+		boolean flag = false;
+		try {
+			customerDAO.deleteCustomer(id);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 }

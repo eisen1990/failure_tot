@@ -8,6 +8,7 @@
 <%@include file = "getCustomers.js" %>
 <%@include file = "putCustomer.js" %>
 <%@include file = "postCustomer.js" %>
+<%@include file = "deleteCustomer.js" %>
 
 
 <div class="container-fluid col-sm-9 col-md-10">
@@ -17,9 +18,11 @@
 			<thead>
 				<tr>
 					<th data-field="id"> Customer ID</th>
+					<th data-field="customer">Customer</th>
 					<th data-field="tc_customer">TC Customer</th>
 					<th data-field="end_customer">End Customer</th>
-					<th><a>수정</a></th>
+					<th>Modification</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody id="customer_tbody">
@@ -30,6 +33,7 @@
 
 
 	<form method="post" id="insert_customer_form" name="insert_customer_form">
+		<input type="text" id="customer" name="customer">
 		<input type="text" id="tc_customer" name="tc_customer"> 
 		<input type="text" id="end_customer" name="end_customer">
 		<button type="button" id="submit_customer">등록</button>

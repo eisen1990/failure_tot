@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.chipmngt.dao.DeviceDAO;
 import com.example.chipmngt.dto.DeviceDTO;
 
+import jdk.internal.jline.internal.Log;
+
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
@@ -15,23 +17,49 @@ public class DeviceServiceImpl implements DeviceService {
 	private DeviceDAO deviceDAO;
 
 	@Override
-	public List<DeviceDTO> getDevices() throws Exception {
-		List<DeviceDTO> result = deviceDAO.selectDevices();
+	public List<DeviceDTO> getDevices() {
+		List<DeviceDTO> result = null;
+		try {
+			result = deviceDAO.selectDevices();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return result;
 	}
 
 	@Override
-	public void putDevice(DeviceDTO dDTO) throws Exception {
-		deviceDAO.insertDevice(dDTO);
+	public boolean putDevice(DeviceDTO dDTO) {
+		boolean flag = false;
+		try {
+			deviceDAO.insertDevice(dDTO);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 
 	@Override
-	public void modifyDevice(DeviceDTO dDTO) throws Exception {
-		deviceDAO.updateDevice(dDTO);
+	public boolean modifyDevice(DeviceDTO dDTO) {
+		boolean flag = false;
+		try {
+			deviceDAO.updateDevice(dDTO);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 
 	@Override
-	public void removeDevice(Integer id) throws Exception {
-		deviceDAO.deleteDevice(id);
+	public boolean removeDevice(Integer id) {
+		boolean flag = false;
+		try {
+			deviceDAO.deleteDevice(id);
+			flag = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return flag;
 	}
 }

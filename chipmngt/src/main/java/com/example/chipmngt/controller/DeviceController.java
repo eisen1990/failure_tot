@@ -21,107 +21,95 @@ import com.example.chipmngt.service.DeviceService;
 @Controller
 @RequestMapping(value = "/device")
 public class DeviceController {
-		
+
 	@Autowired
 	private DeviceService deviceService;
-	
+
 	@RequestMapping
 	public ModelAndView viewDeviceList() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("device/view");
-		
+
 		return mav;
 	}
-	
-	@PostMapping(value = "/{device}/{family}")
+
+	@PostMapping(value = "/post/{device}/{family}")
 	@ResponseBody
-	public JSONObject putDeviceAPI(
-			@PathVariable("device") String device,
-			@PathVariable("family") String family
-			) {
+	public JSONObject postDeviceAPI(
+			@PathVariable("device_full") String device_full,
+			@PathVariable("family") String family) {
 		JSONObject result = new JSONObject();
-		DeviceDTO dDTO = new DeviceDTO(device, family);
-		
+		DeviceDTO dDTO = new DeviceDTO(device_full, family);
+
 		System.out.println(dDTO.toString());
+
+		// device_name : TCCXXXX, TCMXXXX, AD55 로 자르는 루틴
+		//dDTO.setDevice_name();
+		// icode : 마지막이 i인지 검사하는 루틴
+		//dDTO.seticode();
 		
-		try {
-			deviceService.putDevice(dDTO);
-			result.put("result", "pass");
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("result", "error");
-		}
-		
+//		result.put("result", deviceService.putDevice(dDTO));
+
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public JSONObject getDevicesAPI() {
 		JSONObject result = new JSONObject();
 		List<DeviceDTO> list = new ArrayList<DeviceDTO>();
-		
-		try {
-			list = deviceService.getDevices();
-			JSONArray jsonList = DeviceToJSON(list);
-			result.put("result", "pass");
-			result.put("list", jsonList);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			result.put("result", "error");
-		}
-		return result;
-	}
-	
-	@PutMapping(value="/{id}/{device}/{family}")
-	@ResponseBody
-	public JSONObject putDeviceAPI(
-			@PathVariable("id") int id,
-			@PathVariable("device") String device,
-			@PathVariable("family") String family
-			) {
-		JSONObject result = new JSONObject();
-		DeviceDTO dDTO = new DeviceDTO(device, family);
-		
-		try {
-			deviceService.modifyDevice(dDTO);
-			result.put("result", "pass");
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("result", "error");
-		}
-		
-		return result;
-	}
-	
-	@DeleteMapping(value="/{id}")
-	@ResponseBody
-	public JSONObject putDeviceAPI(
-			@PathVariable("id") int id
-			) {
-		JSONObject result = new JSONObject();
-		
-		try {
-			deviceService.removeDevice(id);
-			result.put("result", "pass");
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("result", "error");
-		}
-		
-		return result;
-	}
-	
 
-	
+		list = deviceService.getDevices();
+		if (list == null) {
+			result.put("result", false);
+			result.put("list", null);
+		} else {
+			JSONArray jsonList = DeviceToJSON(list);
+			result.put("result", true);
+			result.put("list", jsonList);
+		}
+
+		return result;
+	}
+
+	@PutMapping(value = "/{id}/{device_name}/{device_full}/{family}")
+	@ResponseBody
+	public JSONObject putDeviceAPI(
+			@PathVariable("id") int id, 
+			@PathVariable("device_name") String device_name,
+			@PathVariable("device_full") String device_full,
+			@PathVariable("family") String family) {
+		JSONObject result = new JSONObject();
+		DeviceDTO dDTO = new DeviceDTO(id, device_name, device_full, family);
+
+		System.out.println(dDTO.toString());
+
+		result.put("result", deviceService.modifyDevice(dDTO));
+
+		return result;
+	}
+
+	@DeleteMapping(value = "/{id}")
+	@ResponseBody
+	public JSONObject putDeviceAPI(@PathVariable("id") int id) {
+		JSONObject result = new JSONObject();
+
+		System.out.println("id=" + id);
+
+		result.put("result", deviceService.removeDevice(id));
+
+		return result;
+	}
+
 	public JSONArray DeviceToJSON(List<DeviceDTO> list) {
 		JSONArray result = new JSONArray();
 		for (DeviceDTO deviceDTO : list) {
 			JSONObject elem = new JSONObject();
-			elem.put("id", deviceDTO.getId() );
-			elem.put("device", deviceDTO.getDevice() );
-			elem.put("family", deviceDTO.getFamily() );
+			elem.put("id", deviceDTO.getId());
+			elem.put("device_name", deviceDTO.getDevice_name());
+			elem.put("device_full", deviceDTO.getDevice_full());
+			elem.put("family", deviceDTO.getFamily());
+			elem.put("icode", deviceDTO.getIcode());
 			result.add(elem);
 		}
 		return result;

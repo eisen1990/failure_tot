@@ -51,29 +51,5 @@ public class ShipmentController {
 		return result;
 	}
 	
-	@PostMapping(value = "/insert")
-	@ResponseBody
-	public JSONObject putCustomerAPI(HttpServletRequest req) {
-		JSONObject result = new JSONObject();
-		DeviceDTO dDTO = new DeviceDTO();
-		
-		String device = req.getParameter("device");
-		String family = req.getParameter("family");
-		
-		dDTO.setDevice(device);
-		dDTO.setFamily(family);
-		
-		System.out.println(dDTO.toString());
-		
-		try {
-			DeviceService.putDevice(dDTO);
-			result.put("result", "pass");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			result.put("result", "error");
-		}
-		
-		return result;
-	}
+
 }

@@ -5,8 +5,10 @@
 
 <%@include file = "../nav.jsp" %>
 
-<%@include file = "postDevice.js" %>
-<%@include file = "getDevices.js" %>
+<%@include file = "getCustomers.js" %>
+<%@include file = "putCustomer.js" %>
+<%@include file = "postCustomer.js" %>
+<%@include file = "deleteCustomer.js" %>
 
 <div class="container-fluid col-sm-9 col-md-10">
 

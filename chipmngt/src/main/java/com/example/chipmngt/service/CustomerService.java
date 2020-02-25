@@ -5,8 +5,8 @@ import java.util.List;
 import com.example.chipmngt.dto.CustomerDTO;
 
 public interface CustomerService {
-	public List<CustomerDTO> getCustomers() throws Exception;
-	public void putCustomer(CustomerDTO cDTO) throws Exception;
-	public void modifyCustomer(CustomerDTO cDTO) throws Exception;
-	public void removeCustomer(Integer id) throws Exception;
+	public List<CustomerDTO> getCustomers();
+	public boolean putCustomer(CustomerDTO cDTO);
+	public boolean modifyCustomer(CustomerDTO cDTO);
+	public boolean removeCustomer(Integer id);
 }
